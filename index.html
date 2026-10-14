@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人作品集 · 贝克汉堡-多智能体运营平台</title>
+  <style>
+    :root {
+      --green: #3e9b47;
+      --deep: #2a7a38;
+      --lime: #a9d95e;
+      --gold: #f0b429;
+      --cream: #fbf6ea;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+        'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    /* 毛玻璃导航 */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(251, 246, 234, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.06);
+    }
+    nav .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .brand { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+    .brand .dot { color: var(--green); }
+    nav .links { display: flex; align-items: center; gap: 14px; }
+    nav .nav-a {
+      font-size: 14px; color: var(--muted); text-decoration: none;
+      padding: 6px 4px; transition: color .2s;
+    }
+    nav .nav-a:hover { color: var(--green); }
+    nav .gh {
+      font-size: 14px; color: var(--muted); text-decoration: none;
+      border: 1px solid rgba(26,26,26,.12); border-radius: 999px; padding: 6px 16px;
+      transition: all .2s;
+    }
+    nav .gh:hover { color: var(--green); border-color: var(--green); }
+
+    /* Hero */
+    .hero { padding: 88px 0 40px; text-align: center; }
+    .hero .badge {
+      display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 2px;
+      color: var(--green); border: 1px solid var(--lime); border-radius: 999px;
+      padding: 6px 16px; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: 52px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; }
+    .hero h1 em { font-style: normal; color: var(--green); }
+    .hero p { font-size: 18px; color: var(--muted); margin-top: 20px; }
+
+    /* 智能体矩阵 */
+    .matrix { padding: 24px 0 40px; }
+    .sec-title { text-align: center; font-size: 26px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 8px; }
+    .sec-sub { text-align: center; font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+    .lead-box {
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--deep), var(--green));
+      color: #fff; border-radius: 20px; padding: 26px 32px; text-align: center;
+      box-shadow: 0 8px 28px rgba(42, 122, 56, .28);
+      max-width: 560px; position: relative; z-index: 2;
+    }
+    .lead-box .role { font-size: 12px; letter-spacing: 3px; color: #d3ecc8; margin-bottom: 6px; }
+    .lead-box h3 { font-size: 24px; font-weight: 800; }
+    .lead-box p { font-size: 14px; margin-top: 8px; color: #eaf6e2; }
+    .connect { height: 46px; position: relative; z-index: 1; }
+    .connect svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .sub-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .sub {
+      background: #fff; border-radius: 18px; padding: 22px 18px; text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,.06);
+      border-top: 4px solid var(--lime);
+      transition: all .2s; cursor: pointer; text-decoration: none; color: inherit; display: block;
+    }
+    .sub:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.1); }
+    .sub .emoji { font-size: 30px; line-height: 1; }
+    .sub h4 { font-size: 16px; font-weight: 800; margin-top: 10px; }
+    .sub .cap { display: inline-block; font-size: 11px; font-weight: 700; color: var(--deep); background: rgba(169,217,94,.18); border-radius: 999px; padding: 2px 10px; margin-top: 8px; }
+    .sub p { font-size: 12.5px; color: var(--muted); margin-top: 8px; line-height: 1.55; }
+    .sub.gold { border-top-color: var(--gold); }
+    .sub.gold .cap { color: #a07800; background: rgba(240,180,41,.14); }
+
+    /* 项目卡片 */
+    .project { padding: 24px 0 20px; }
+    .cards { display: grid; gap: 32px; }
+    .card {
+      background: #fff; border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      padding: 48px; display: grid; gap: 24px;
+    }
+    .card .head { display: flex; align-items: center; gap: 16px; }
+    .card .head .num {
+      flex-shrink: 0; width: 46px; height: 46px; border-radius: 14px;
+      background: rgba(62,155,71,.12); color: var(--green);
+      font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    }
+    .card .head .num.g4 { background: rgba(240,180,41,.16); color: #a07800; }
+    .card h2 { font-size: 28px; font-weight: 800; letter-spacing: -.5px; }
+    .card .subhead { font-size: 13px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .card .desc { color: var(--muted); font-size: 15.5px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 13px; font-weight: 600; color: var(--deep);
+      background: rgba(169, 217, 94, 0.16); border-radius: 6px; padding: 4px 12px;
+    }
+    .features { list-style: none; display: grid; gap: 10px; }
+    .features li { position: relative; padding-left: 28px; color: #3c3c3c; font-size: 14.5px; }
+    .features li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+    .actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff; text-decoration: none; font-weight: 700;
+      font-size: 16px; border-radius: 999px; padding: 14px 32px;
+      transition: all .2s; box-shadow: 0 4px 16px rgba(62, 155, 71, 0.3);
+    }
+    .btn-primary:hover { background: var(--deep); transform: translateY(-2px); }
+    .btn-gh {
+      color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px;
+      border-bottom: 2px solid transparent; transition: all .2s;
+    }
+    .btn-gh:hover { border-color: var(--green); color: var(--green); }
+
+    .more {
+      margin-top: 24px; text-align: center; color: #a0a0a0; font-size: 14px;
+      border: 1px dashed rgba(26,26,26,.15); border-radius: 16px; padding: 32px;
+    }
+    footer { padding: 40px 0 32px; text-align: center; color: #a0a0a0; font-size: 13px; }
+    footer b { color: var(--muted); }
+
+    @media (max-width: 860px) { .sub-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) {
+      .hero { padding-top: 56px; }
+      .hero h1 { font-size: 34px; }
+      .card { padding: 28px; }
+      .btn-primary { width: 100%; justify-content: center; }
+      .sub-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <div class="brand">作品集<span class="dot">.</span></div>
+      <div class="links">
+        <a class="nav-a" href="#matrix">智能体矩阵</a>
+        <a class="nav-a" href="#projects">项目</a>
+        <a class="gh" href="https://github.com/haojiezhao343-code" target="_blank" rel="noopener">GitHub 主页 ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <!-- Hero -->
+    <header class="hero">
+      <span class="badge">个人作品集 · PORTFOLIO · AI 应用开发 / FDE</span>
+      <h1>一个平台，四路智能体，<br /><em>AI 协作驱动</em>的连锁餐饮运营</h1>
+      <p>贝克汉堡-多智能体运营平台：基于 deepagents（LangGraph）构建 1 个编排主智能体 + 4 个独立子智能体，统一入口、独立会话，全部真实部署、正在线上运行。</p>
+    </header>
+
+    <!-- 智能体矩阵 -->
+    <section class="matrix" id="matrix">
+      <div class="sec-title">主智能体 × 子智能体架构</div>
+      <div class="sec-sub">意图识别 → 任务路由 → 子智能体协作执行 → 结果聚合</div>
+
+      <div class="lead-box">
+        <div class="role">MAIN AGENT · 主智能体</div>
+        <h3>贝克汉堡-多智能体运营平台</h3>
+        <p>统一入口 · 意图识别 · 任务编排路由 · 多智能体协作调度 · 执行过程实时推送（WebSocket / SSE）</p>
+      </div>
+
+      <div class="connect">
+        <svg viewBox="0 0 960 46" preserveAspectRatio="none">
+          <path d="M480 0 V16 M120 40 V28 H840 V40 M480 16 V28 M320 40 V28 M640 40 V28"
+                fill="none" stroke="#a9d95e" stroke-width="2" />
+        </svg>
+      </div>
+
+      <div class="sub-grid">
+        <a class="sub" href="#p1">
+          <div class="emoji">📚</div>
+          <h4>知识库智能体</h4>
+          <span class="cap">知识供给 · RAG 全链路</span>
+          <p>MinerU 解析 / 三路并发召回 / RRF 融合精排，答案可溯源</p>
+        </a>
+        <a class="sub" href="#p2">
+          <div class="emoji">🧭</div>
+          <h4>联网调研智能体</h4>
+          <span class="cap">Tavily · RAGFlow</span>
+          <p>联网搜索 + 知识库问答，调研结果自动生成 PDF 报告</p>
+        </a>
+        <a class="sub" href="#p3">
+          <div class="emoji">🛎️</div>
+          <h4>智能应答台</h4>
+          <span class="cap">三轨路由 · 流程编排</span>
+          <p>订单查询 / 物流跟踪 / 退换政策，高风险自动转人工</p>
+        </a>
+        <a class="sub gold" href="#p4">
+          <div class="emoji">📊</div>
+          <h4>运营智能体</h4>
+          <span class="cap">竞品监控 · 素材生成</span>
+          <p>竞品监控 / 创意 / 广告推荐 / 库存建议，图文视频生成</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 项目 -->
+    <main class="project" id="projects">
+      <div class="sec-title" style="margin-top:24px;">项目详情</div>
+      <div class="sec-sub">点击「访问线上系统」直接进入对应智能体</div>
+
+      <div class="cards">
+        <article class="card" id="p1">
+          <div class="head">
+            <div class="num">01</div>
+            <div><h2>贝克汉堡-多智能体运营平台 · 知识库智能体</h2><div class="subhead">子智能体 · 知识供给（RAG 全链路）</div></div>
+          </div>
+          <p class="desc">MinerU 云 API 解析 PDF / Word / 扫描件，按标题层级切分并保留段落定位；BGE-M3 生成稠密 + 稀疏双向量、Milvus 混合索引；向量 + HyDE + 联网三路并发召回，RRF 融合后由 rerank 精排并断崖截断，答案可溯源、证据不足主动拒答或反问澄清。</p>
+          <div class="tags">
+            <span class="tag">RAG</span><span class="tag">MinerU</span><span class="tag">BGE-M3</span><span class="tag">Milvus</span><span class="tag">RRF 融合</span><span class="tag">FastAPI</span>
+          </div>
+          <ul class="features">
+            <li>PDF / Word / 扫描件智能解析入库，原文档与图片对象存储</li>
+            <li>向量 + HyDE + 联网三路并发召回，RRF 融合（k=60）</li>
+            <li>qwen3-rerank 精排并断崖截断，答案可溯源</li>
+            <li>证据不足主动拒答或反问澄清，流式打字机输出</li>
+          </ul>
+          <div class="actions">
+            <a class="btn-primary" href="#" data-port="7954" target="_blank" rel="noopener">访问线上系统 →</a>
+            <a class="btn-gh" href="https://github.com/haojiezhao343-code" target="_blank" rel="noopener">查看源码</a>
+          </div>
+        </article>
+
+        <article class="card" id="p2">
+          <div class="head">
+            <div class="num">02</div>
+            <div><h2>贝克汉堡-多智能体运营平台 · 联网调研智能体</h2><div class="subhead">子智能体 · 联网调研（多智能体协作）</div></div>
+          </div>
+          <p class="desc">集成 Tavily 联网搜索与 RAGFlow 知识库问答子智能体，按需检索外部信息与既有知识；支持读取上传的 Markdown / Word / PDF / Excel 文件，并将调研结果自动生成 Markdown → PDF 报告。</p>
+          <div class="tags">
+            <span class="tag">LangGraph</span><span class="tag">multi-agent</span><span class="tag">Tavily</span><span class="tag">RAGFlow</span><span class="tag">报告生成</span><span class="tag">SSE</span>
+          </div>
+          <ul class="features">
+            <li>Tavily 联网搜索 + RAGFlow 知识库问答双源检索</li>
+            <li>支持读取上传的 Markdown / Word / PDF / Excel 文件</li>
+            <li>调研结果自动生成 Markdown → PDF 报告</li>
+            <li>推理过程实时可见，决策可解释</li>
+          </ul>
+          <div class="actions">
+            <a class="btn-primary" href="#" data-port="8000" target="_blank" rel="noopener">访问线上系统 →</a>
+            <a class="btn-gh" href="https://github.com/haojiezhao343-code" target="_blank" rel="noopener">查看源码</a>
+          </div>
+        </article>
+
+        <article class="card" id="p3">
+          <div class="head">
+            <div class="num">03</div>
+            <div><h2>贝克汉堡-智能应答台</h2><div class="subhead">售前售后 · 三轨路由 + 流程编排</div></div>
+          </div>
+          <p class="desc">售前售后咨询集中在订单状态、物流跟踪、退换政策与投诉处理：LLM 以 temperature=0 作为确定性决策中枢，将用户消息路由至「业务办理 / 知识咨询 / 闲聊」三轨；YAML 定义 6 个业务流程按 DAG 推进，命令白名单校验约束输出，退款审批等高风险场景自动转人工。</p>
+          <div class="tags">
+            <span class="tag">LangChain</span><span class="tag">FastAPI</span><span class="tag">流程编排</span><span class="tag">MySQL</span><span class="tag">httpx</span>
+          </div>
+          <ul class="features">
+            <li>三轨对话路由 + 多轨歧义自动生成澄清话术</li>
+            <li>YAML 定义 6 个业务流程，FlowExecutor 按 DAG 推进</li>
+            <li>查订单 / 查物流 / 退款申请等业务动作异步调用下游服务</li>
+            <li>对话状态 JSON 持久化，支持断点续聊与自动转人工</li>
+          </ul>
+          <div class="actions">
+            <a class="btn-primary" href="#" data-port="18082" target="_blank" rel="noopener">访问线上系统 →</a>
+            <a class="btn-gh" href="https://github.com/haojiezhao343-code" target="_blank" rel="noopener">查看源码</a>
+          </div>
+        </article>
+
+        <article class="card" id="p4">
+          <div class="head">
+            <div class="num g4">04</div>
+            <div><h2>贝克汉堡-多智能体运营平台 · 运营智能体</h2><div class="subhead">子智能体 · 门店经营（竞品监控 + 素材生成）</div></div>
+          </div>
+          <p class="desc">以 LangGraph 编排「商品上下文 → 诊断 → 创意策略 → 质量审核 → 人工审核」工作流，经 ToolGateway 收敛竞品监控、创意方案、广告推荐、库存建议等 7 类运营工具；竞品监控覆盖抖音 / 淘宝天猫 / 拼多多 / Amazon 平台适配器，多模态素材生成打通「文案 → 图片 → 视频」链路。</p>
+          <div class="tags">
+            <span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Next.js</span><span class="tag">竞品监控</span><span class="tag">文生图 / 视频</span>
+          </div>
+          <ul class="features">
+            <li>ToolGateway 收敛 7 类运营工具，租户 / 角色 / 租约 / 幂等四重管控</li>
+            <li>抖音 / 淘宝天猫 / 拼多多 / Amazon 四平台竞品适配器，快照对比变化</li>
+            <li>多模态素材生成对接 DashScope / 即梦双供应商</li>
+            <li>登录即用的运营工作台，RBAC 权限隔离</li>
+          </ul>
+          <div class="actions">
+            <a class="btn-primary" href="#" data-port="80" target="_blank" rel="noopener">访问线上系统 →</a>
+            <a class="btn-gh" href="https://github.com/haojiezhao343-code/ecommerce-operation-assistant" target="_blank" rel="noopener">查看源码</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="more">更多项目（贝克汉堡-员工办公助手 · 贝克汉堡智能供应链系统），敬请期待</div>
+    </main>
+  </div>
+
+  <footer>© 2026 · 贝克汉堡-多智能体运营平台 · 1 主智能体 + 4 子智能体 · 部署于腾讯云 · <b>haojiezhao343-code</b></footer>
+
+  <script>
+    // 按当前访问主机动态生成功能直达链接（80 端口不带 :80）
+    const HOST = '49.233.198.106';
+    document.querySelectorAll('.btn-primary[data-port]').forEach(a => {
+      const port = a.dataset.port;
+      a.href = port === '80' ? `http://${HOST}/` : `http://${HOST}:${port}/`;
+    });
+  </script>
+</body>
+</html>
