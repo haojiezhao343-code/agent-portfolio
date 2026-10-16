@@ -832,6 +832,48 @@
       line-height: 1.7;
     }
 
+    /* 演示商品封面：取自线上演示环境商品池，与表格同卡片展示真实商品图 */
+    .goods-strip {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+    .goods-strip-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .goods-strip-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .goods-item { margin: 0; min-width: 0; }
+    .goods-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+    }
+    .goods-item figcaption {
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    @media (max-width: 720px) {
+      .goods-strip-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* Agent Section */
     .agent-section { margin-bottom: 32px; }
 
@@ -1433,6 +1475,34 @@
                 </tr>
               </tbody>
             </table>
+
+            <!-- 演示商品封面：线上演示环境商品池的真实商品图 -->
+            <div class="goods-strip">
+              <span class="goods-strip-label">Demo Products · 演示商品封面</span>
+              <div class="goods-strip-grid">
+                <figure class="goods-item">
+                  <img src="http://49.233.198.106/uploads/products/p1.jpg" alt="香辣鸡腿中国汉堡 商品图" loading="lazy" width="160" height="160">
+                  <figcaption>香辣鸡腿中国汉堡<br>¥15.00</figcaption>
+                </figure>
+                <figure class="goods-item">
+                  <img src="http://49.233.198.106/uploads/products/p2.jpg" alt="北京烤鸭中国汉堡 商品图" loading="lazy" width="160" height="160">
+                  <figcaption>北京烤鸭中国汉堡<br>¥21.00</figcaption>
+                </figure>
+                <figure class="goods-item">
+                  <img src="http://49.233.198.106/uploads/products/p3.jpg" alt="藤椒鸡腿中国汉堡 商品图" loading="lazy" width="160" height="160">
+                  <figcaption>藤椒鸡腿中国汉堡<br>¥16.00</figcaption>
+                </figure>
+                <figure class="goods-item">
+                  <img src="http://49.233.198.106/uploads/products/p4.jpg" alt="塔塔香鸡腿 商品图" loading="lazy" width="160" height="160">
+                  <figcaption>塔塔香鸡腿<br>¥12.80</figcaption>
+                </figure>
+                <figure class="goods-item">
+                  <img src="http://49.233.198.106/uploads/products/p5.jpg" alt="冰柠可乐 商品图" loading="lazy" width="160" height="160">
+                  <figcaption>冰柠可乐<br>¥7.00</figcaption>
+                </figure>
+              </div>
+            </div>
+
             <p class="demo-note">* 演示数据 · 公开链接解析适配器覆盖抖音 / 淘宝天猫 / 拼多多 / Amazon，其余平台走通用解析兜底</p>
           </div>
         </div>
