@@ -354,7 +354,8 @@
     /* Module Map */
     .module-section { margin-bottom: 32px; }
 
-    .module-grid {
+    .module-list {
+      list-style: none;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
@@ -364,10 +365,12 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 20px;
+      padding: 18px 18px;
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      align-items: flex-start;
+      gap: 14px;
+      height: 100%;
+      text-decoration: none;
       transition: border-color 0.2s ease, background 0.2s ease;
     }
 
@@ -376,11 +379,37 @@
       background: var(--bg-card-hover);
     }
 
-    .route-path {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      word-break: break-all;
+    .module-icon {
+      flex: none;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+    }
+
+    .module-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.8;
+    }
+
+    .module-body {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .module-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      min-width: 0;
     }
 
     .module-name {
@@ -389,10 +418,61 @@
       color: var(--text-primary);
     }
 
+    .route-path {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      word-break: break-all;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .module-state {
+      margin-left: auto;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.02em;
+      padding: 2px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      white-space: nowrap;
+    }
+
+    .module-state::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .module-state.is-live {
+      color: var(--success);
+      border-color: color-mix(in oklch, var(--success) 30%, transparent);
+      background: var(--success-bg);
+    }
+
+    .module-state.is-route {
+      color: var(--text-muted);
+    }
+
     .module-desc {
       font-size: 12px;
       color: var(--text-secondary);
       line-height: 1.75;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .module-list { grid-template-columns: minmax(0, 1fr); }
     }
 
     /* Steps Section */
@@ -1065,41 +1145,121 @@
               <div class="section-label">Module Map</div>
               <h2 class="section-title">系统模块地图</h2>
             </div>
-            <span class="platform-summary">按源码路由逐一对照 · 登录后可见完整功能</span>
+            <span class="platform-summary">6 个路由模块 · 按源码逐一对照 · 绿点=有直达入口，灰点=详情子路由</span>
           </div>
 
-          <div class="module-grid">
-            <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
-              <span class="route-path">/ · 工作台</span>
-              <span class="module-name">经营概览</span>
-              <p class="module-desc">4 步上线清单与推进状态、店铺 / 商品 / 平台三组 KPI、平台筛选 Tab、商品池表格、建店与商品建档表单，全部按当前账号权限渲染。</p>
-            </a>
-            <a class="module-card" href="http://49.233.198.106/imports" target="_blank" rel="noopener">
-              <span class="route-path">/imports · 导入中心</span>
-              <span class="module-name">CSV 数据导入</span>
-              <p class="module-desc">经营数据、商品档案、SKU 库存、字段映射 4 类模板下载；三个导入表单共用「先预览、后确认」机制，预览不写库，错误行逐行给出原因。</p>
-            </a>
-            <a class="module-card" href="http://49.233.198.106/settings" target="_blank" rel="noopener">
-              <span class="route-path">/settings · 模型配置</span>
-              <span class="module-name">模型与权限</span>
-              <p class="module-desc">文本 / 图片 / 视频三类模型的供应商、密钥、模型名与轮询参数编辑，内置连接测试；成员管理按 owner / operator / viewer 三角色控制读写。</p>
-            </a>
-            <a class="module-card" href="http://49.233.198.106/agent" target="_blank" rel="noopener">
-              <span class="route-path">/agent · Agent 中心</span>
-              <span class="module-name">多智能体协作</span>
-              <p class="module-desc">意图入口创建受控任务、7 个任务模板、任务中心（2 秒自动刷新）、审批收件箱、结构化记忆与 Agent 目录，协调 Agent 只从已注册工作流中路由。</p>
-            </a>
-            <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
-              <span class="route-path">/products/[id] · 单品运营</span>
-              <span class="module-name">单商品全链路</span>
-              <p class="module-desc">建档与 SKU 库存、平台映射、竞品洞察与快照监控、商品诊断、经营数据回填与周期复盘、推广链接与短链归因、投放建议与实验看板、素材归因、生成任务中心。</p>
-            </a>
-            <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
-              <span class="route-path">/stores/[id] · 店铺详情</span>
-              <span class="module-name">店铺与库存</span>
-              <p class="module-desc">平台账号与授权状态、经营概览、5 步店铺运营流程、库存异常提示、4 步库存处理流程、补货 / 调拨 / 盘点建议（人工确认制）与 SKU 维度库存总览。</p>
-            </a>
-          </div>
+          <ul class="module-list">
+            <li>
+              <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
+                <span class="module-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                  </svg>
+                </span>
+                <span class="module-body">
+                  <span class="module-top">
+                    <span class="module-name">经营概览</span>
+                    <span class="route-path">/ · 工作台</span>
+                    <span class="module-state is-live" title="有直达入口，在线可用">在线</span>
+                  </span>
+                  <p class="module-desc">4 步上线清单与推进状态、店铺 / 商品 / 平台三组 KPI、平台筛选 Tab、商品池表格、建店与商品建档表单，全部按当前账号权限渲染。</p>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="module-card" href="http://49.233.198.106/imports" target="_blank" rel="noopener">
+                <span class="module-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </span>
+                <span class="module-body">
+                  <span class="module-top">
+                    <span class="module-name">CSV 数据导入</span>
+                    <span class="route-path">/imports · 导入中心</span>
+                    <span class="module-state is-live" title="有直达入口，在线可用">在线</span>
+                  </span>
+                  <p class="module-desc">经营数据、商品档案、SKU 库存、字段映射 4 类模板下载；三个导入表单共用「先预览、后确认」机制，预览不写库，错误行逐行给出原因。</p>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="module-card" href="http://49.233.198.106/settings" target="_blank" rel="noopener">
+                <span class="module-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+                  </svg>
+                </span>
+                <span class="module-body">
+                  <span class="module-top">
+                    <span class="module-name">模型与权限</span>
+                    <span class="route-path">/settings · 模型配置</span>
+                    <span class="module-state is-live" title="有直达入口，在线可用">在线</span>
+                  </span>
+                  <p class="module-desc">文本 / 图片 / 视频三类模型的供应商、密钥、模型名与轮询参数编辑，内置连接测试；成员管理按 owner / operator / viewer 三角色控制读写。</p>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="module-card" href="http://49.233.198.106/agent" target="_blank" rel="noopener">
+                <span class="module-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/>
+                    <path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/>
+                    <path d="M2 12h4"/><path d="M18 12h4"/>
+                    <path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                </span>
+                <span class="module-body">
+                  <span class="module-top">
+                    <span class="module-name">多智能体协作</span>
+                    <span class="route-path">/agent · Agent 中心</span>
+                    <span class="module-state is-live" title="有直达入口，在线可用">在线</span>
+                  </span>
+                  <p class="module-desc">意图入口创建受控任务、7 个任务模板、任务中心（2 秒自动刷新）、审批收件箱、结构化记忆与 Agent 目录，协调 Agent 只从已注册工作流中路由。</p>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
+                <span class="module-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+                  </svg>
+                </span>
+                <span class="module-body">
+                  <span class="module-top">
+                    <span class="module-name">单商品全链路</span>
+                    <span class="route-path">/products/[id] · 单品运营</span>
+                    <span class="module-state is-route" title="由首页商品池进入的详情子路由">子路由</span>
+                  </span>
+                  <p class="module-desc">建档与 SKU 库存、平台映射、竞品洞察与快照监控、商品诊断、经营数据回填与周期复盘、推广链接与短链归因、投放建议与实验看板、素材归因、生成任务中心。</p>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
+                <span class="module-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M3 9l1.5-5h15L21 9"/><path d="M4 9h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>
+                    <circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/>
+                    <path d="M3 9h18"/><line x1="12" y1="9" x2="12" y2="21"/>
+                  </svg>
+                </span>
+                <span class="module-body">
+                  <span class="module-top">
+                    <span class="module-name">店铺与库存</span>
+                    <span class="route-path">/stores/[id] · 店铺详情</span>
+                    <span class="module-state is-route" title="由首页店铺卡进入的详情子路由">子路由</span>
+                  </span>
+                  <p class="module-desc">平台账号与授权状态、经营概览、5 步店铺运营流程、库存异常提示、4 步库存处理流程、补货 / 调拨 / 盘点建议（人工确认制）与 SKU 维度库存总览。</p>
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
 
         <!-- Steps Section -->
