@@ -45,6 +45,11 @@
       overflow-x: hidden;
     }
 
+    a:focus-visible, button:focus-visible, select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg-secondary); }
@@ -125,13 +130,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 9px 12px;
+      padding: 10px 12px;
       border-radius: var(--radius-sm);
       color: var(--text-secondary);
       font-size: 13px;
       margin-bottom: 2px;
       text-decoration: none;
       position: relative;
+      min-height: 40px;
     }
 
     .nav-item:hover {
@@ -344,6 +350,50 @@
 
     .intro-meta-key { color: var(--text-muted); }
     .intro-meta-val { color: var(--text-primary); font-weight: 500; text-align: right; }
+
+    /* Module Map */
+    .module-section { margin-bottom: 32px; }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .module-card:hover {
+      border-color: var(--border-light);
+      background: var(--bg-card-hover);
+    }
+
+    .route-path {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    .module-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .module-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
 
     /* Steps Section */
     .steps-section { margin-bottom: 32px; }
@@ -611,6 +661,8 @@
     }
 
     .filter-btn {
+      display: inline-flex;
+      align-items: center;
       padding: 6px 14px;
       border-radius: var(--radius-sm);
       font-size: 12px;
@@ -620,6 +672,8 @@
       cursor: pointer;
       transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
       font-family: inherit;
+      text-decoration: none;
+      min-height: 28px;
     }
 
     .filter-btn:hover, .filter-btn.active {
@@ -654,6 +708,7 @@
 
     .platform-table tr:last-child td { border-bottom: none; }
     .platform-table tr:hover td { background: var(--bg-card-hover); }
+    .platform-table .mono { font-family: var(--font-mono); font-size: 12px; }
 
     .platform-name {
       display: flex;
@@ -694,6 +749,89 @@
       color: var(--text-muted);
       margin-top: 12px;
       font-family: var(--font-mono);
+      line-height: 1.7;
+    }
+
+    /* Agent Section */
+    .agent-section { margin-bottom: 32px; }
+
+    .coord-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px 24px;
+      align-items: start;
+    }
+
+    .coord-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .coord-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 65ch;
+    }
+
+    .coord-routes {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .risk-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 0px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    .risk-r0 { background: var(--success-bg); color: var(--success); }
+    .risk-r1 { background: rgba(29, 78, 216, 0.10); color: #1d4ed8; }
+    .risk-r2 { background: rgba(245, 158, 11, 0.16); color: #92400e; }
+    .risk-r3 { background: var(--accent); color: #ffffff; }
+
+    .table-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    .agent-table-wrap { margin-bottom: 24px; }
+    .agent-table-wrap:last-of-type { margin-bottom: 0; }
+
+    .agent-subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .agent-subtitle .count {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
     }
 
     /* Capability Section */
@@ -701,7 +839,7 @@
 
     .cap-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
@@ -710,6 +848,8 @@
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 20px;
+      display: flex;
+      flex-direction: column;
     }
 
     .cap-name {
@@ -792,8 +932,10 @@
     @media (max-width: 1024px) {
       .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .intro-card { grid-template-columns: 1fr; }
       .intro-meta { border-left: none; padding-left: 0; border-top: 1px solid var(--border-color); padding-top: 16px; }
+      .coord-card { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -802,6 +944,7 @@
       .steps-grid { grid-template-columns: 1fr; }
       .metrics-grid { grid-template-columns: 1fr; }
       .cap-grid { grid-template-columns: 1fr; }
+      .module-grid { grid-template-columns: 1fr; }
       .top-header { padding: 0 16px; }
       .content-area { padding: 16px; }
     }
@@ -815,7 +958,7 @@
         <div class="brand-icon">运</div>
         <div>
           <div class="brand-text">运营智能体</div>
-          <div class="brand-version">v5.8.3</div>
+          <div class="brand-version">v1.0.0 · 工作流版本化</div>
         </div>
       </a>
 
@@ -827,70 +970,50 @@
               <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
               <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
             </svg>
-            <span>概览</span>
-          </div>
-          <div class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            </svg>
-            <span>店铺管理</span>
-          </div>
-          <div class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            <span>商品中心</span>
-          </div>
-          <div class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>
-            </svg>
-            <span>数据分析</span>
+            <span>经营概览</span>
           </div>
         </div>
 
         <div class="nav-section">
-          <div class="nav-section-title">智能体</div>
-          <div class="nav-item">
+          <div class="nav-section-title">运营模块</div>
+          <a class="nav-item" href="http://49.233.198.106/imports" target="_blank" rel="noopener">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/>
+            </svg>
+            <span>导入中心</span>
+          </a>
+          <a class="nav-item" href="http://49.233.198.106/settings" target="_blank" rel="noopener">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+            </svg>
+            <span>模型配置</span>
+          </a>
+          <a class="nav-item" href="http://49.233.198.106/agent" target="_blank" rel="noopener">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/>
               <path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/>
               <path d="M2 12h4"/><path d="M18 12h4"/>
               <path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>
             </svg>
-            <span>Agent 配置</span>
-          </div>
-          <div class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/>
-              <path d="M2 12l10 5 10-5"/>
-            </svg>
-            <span>知识库</span>
-          </div>
-          <div class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-            <span>对话记录</span>
-            <span class="nav-badge">12</span>
-          </div>
+            <span>Agent 中心</span>
+          </a>
         </div>
 
         <div class="nav-section">
-          <div class="nav-section-title">系统</div>
-          <a href="./index.html" class="nav-item">
+          <div class="nav-section-title">项目</div>
+          <a class="nav-item" href="https://github.com/haojiezhao343-code/ecommerce-operation-assistant" target="_blank" rel="noopener">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span>源码仓库</span>
+          </a>
+          <a class="nav-item" href="./index.html">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>
             </svg>
             <span>返回作品集</span>
           </a>
-          <div class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1-1.82V12a1.65 1.65 0 0 0 1.82-1.82l.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33"/>
-            </svg>
-            <span>设置</span>
-          </div>
         </div>
       </nav>
     </aside>
@@ -922,15 +1045,60 @@
         <div class="intro-section">
           <div class="intro-card">
             <div>
-              <h1 class="intro-title">运营智能体 · 门店经营工作台</h1>
-              <p class="intro-desc">以 LangGraph 编排「商品上下文 → 诊断 → 创意策略 → 质量审核 → 人工审核」工作流，经 ToolGateway 收敛竞品监控、创意方案、广告推荐、库存建议等 7 类运营工具；竞品监控覆盖抖音 / 淘宝天猫 / 拼多多 / Amazon 平台适配器，多模态素材生成打通「文案 → 图片 → 视频」链路。登录即用的运营工作台，RBAC 权限隔离。</p>
+              <h1 class="intro-title">运营智能体 · 电商经营工作台</h1>
+              <p class="intro-desc">全栈电商运营智能体：FastAPI + LangGraph 编排 1 个协调 Agent 与 8 个专业 Agent，经 7 个版本化受控工作流覆盖商品诊断、创意生产、竞品监控、投放闭环、周期复盘、库存运营与店铺巡检；ToolGateway 收敛 16 个 R0 至 R3 风险分级工具，人工审核门与数据库审批双重放行，LLM 不可用时自动降级规则兜底。配套导入中心、模型配置与单品 / 店铺运营页面，账号登录即用。</p>
             </div>
             <div class="intro-meta">
               <div class="intro-meta-row"><span class="intro-meta-key">项目编号</span><span class="intro-meta-val">04 / 04</span></div>
               <div class="intro-meta-row"><span class="intro-meta-key">线上地址</span><span class="intro-meta-val" style="font-family: var(--font-mono);">49.233.198.106:80</span></div>
               <div class="intro-meta-row"><span class="intro-meta-key">访问方式</span><span class="intro-meta-val">账号登录</span></div>
-              <div class="intro-meta-row"><span class="intro-meta-key">技术栈</span><span class="intro-meta-val">LangGraph · Next.js</span></div>
+              <div class="intro-meta-row"><span class="intro-meta-key">演示数据</span><span class="intro-meta-val" style="font-family: var(--font-mono);">1 店 · 5 商品 · 6 SKU</span></div>
+              <div class="intro-meta-row"><span class="intro-meta-key">技术栈</span><span class="intro-meta-val">FastAPI · LangGraph · Next.js</span></div>
             </div>
+          </div>
+        </div>
+
+        <!-- Module Map Section -->
+        <div class="module-section">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="section-label">Module Map</div>
+              <h2 class="section-title">系统模块地图</h2>
+            </div>
+            <span class="platform-summary">按源码路由逐一对照 · 登录后可见完整功能</span>
+          </div>
+
+          <div class="module-grid">
+            <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
+              <span class="route-path">/ · 工作台</span>
+              <span class="module-name">经营概览</span>
+              <p class="module-desc">4 步上线清单与推进状态、店铺 / 商品 / 平台三组 KPI、平台筛选 Tab、商品池表格、建店与商品建档表单，全部按当前账号权限渲染。</p>
+            </a>
+            <a class="module-card" href="http://49.233.198.106/imports" target="_blank" rel="noopener">
+              <span class="route-path">/imports · 导入中心</span>
+              <span class="module-name">CSV 数据导入</span>
+              <p class="module-desc">经营数据、商品档案、SKU 库存、字段映射 4 类模板下载；三个导入表单共用「先预览、后确认」机制，预览不写库，错误行逐行给出原因。</p>
+            </a>
+            <a class="module-card" href="http://49.233.198.106/settings" target="_blank" rel="noopener">
+              <span class="route-path">/settings · 模型配置</span>
+              <span class="module-name">模型与权限</span>
+              <p class="module-desc">文本 / 图片 / 视频三类模型的供应商、密钥、模型名与轮询参数编辑，内置连接测试；成员管理按 owner / operator / viewer 三角色控制读写。</p>
+            </a>
+            <a class="module-card" href="http://49.233.198.106/agent" target="_blank" rel="noopener">
+              <span class="route-path">/agent · Agent 中心</span>
+              <span class="module-name">多智能体协作</span>
+              <p class="module-desc">意图入口创建受控任务、7 个任务模板、任务中心（2 秒自动刷新）、审批收件箱、结构化记忆与 Agent 目录，协调 Agent 只从已注册工作流中路由。</p>
+            </a>
+            <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
+              <span class="route-path">/products/[id] · 单品运营</span>
+              <span class="module-name">单商品全链路</span>
+              <p class="module-desc">建档与 SKU 库存、平台映射、竞品洞察与快照监控、商品诊断、经营数据回填与周期复盘、推广链接与短链归因、投放建议与实验看板、素材归因、生成任务中心。</p>
+            </a>
+            <a class="module-card" href="http://49.233.198.106/" target="_blank" rel="noopener">
+              <span class="route-path">/stores/[id] · 店铺详情</span>
+              <span class="module-name">店铺与库存</span>
+              <p class="module-desc">平台账号与授权状态、经营概览、5 步店铺运营流程、库存异常提示、4 步库存处理流程、补货 / 调拨 / 盘点建议（人工确认制）与 SKU 维度库存总览。</p>
+            </a>
           </div>
         </div>
 
@@ -942,7 +1110,7 @@
               <h2 class="section-title">上线前必须完成的 4 步</h2>
             </div>
             <div class="progress-badge">
-              <span>已完成</span>
+              <span>线上演示环境已完成</span>
               <span class="completed">2 / 4</span>
             </div>
           </div>
@@ -954,7 +1122,7 @@
                 <span class="step-status completed">已完成</span>
               </div>
               <h3 class="step-name">建店建档</h3>
-              <p class="step-desc">登记店铺主体、平台授权与经营类目，生成唯一 store_id，后续所有数据都挂在它下面。</p>
+              <p class="step-desc">登记店铺主体、平台账号与经营类目，生成唯一 store_id，商品、库存、监控任务全部挂在它下面。</p>
               <a class="step-action primary" href="http://49.233.198.106/" target="_blank" rel="noopener">开始建档</a>
             </div>
 
@@ -964,7 +1132,7 @@
                 <span class="step-status completed">已完成</span>
               </div>
               <h3 class="step-name">导入数据</h3>
-              <p class="step-desc">导入商品、订单、库存。支持 CSV / 平台开放接口两种来源，导入后自动生成卖点草稿。</p>
+              <p class="step-desc">商品、SKU 库存、经营数据三类 CSV 配合字段映射模板导入；预览阶段逐行校验，确认后才写入业务库。</p>
               <a class="step-action secondary" href="http://49.233.198.106/imports" target="_blank" rel="noopener">导入数据</a>
             </div>
 
@@ -974,7 +1142,7 @@
                 <span class="step-status pending">未开始</span>
               </div>
               <h3 class="step-name">配置模型</h3>
-              <p class="step-desc">指定意图识别、向量化、生成的模型与密钥来源，配好后才能跑通 RAG 与文案生成。</p>
+              <p class="step-desc">配置文本、图片、视频三类模型的供应商、密钥与调用参数，先跑连接测试验证，再启用生成与诊断能力。</p>
               <a class="step-action secondary" href="http://49.233.198.106/settings" target="_blank" rel="noopener">配置模型</a>
             </div>
 
@@ -984,8 +1152,8 @@
                 <span class="step-status pending">未开始</span>
               </div>
               <h3 class="step-name">启动 Agent</h3>
-              <p class="step-desc">开启竞品监控与素材生成子智能体，工作台开始出现真实数据与待办任务。</p>
-              <a class="step-action secondary" href="http://49.233.198.106/" target="_blank" rel="noopener">启动 Agent</a>
+              <p class="step-desc">在 Agent 中心描述经营目标或直接选择任务模板，协调 Agent 路由到受控工作流，任务与审批开始进入待办。</p>
+              <a class="step-action secondary" href="http://49.233.198.106/agent" target="_blank" rel="noopener">启动 Agent</a>
             </div>
           </div>
         </div>
@@ -997,6 +1165,7 @@
               <div class="section-label">Key Figures</div>
               <h2 class="section-title">经营概览</h2>
             </div>
+            <span class="platform-summary">数据口径：线上演示环境实时读取</span>
           </div>
 
           <div class="metrics-grid">
@@ -1009,11 +1178,11 @@
                   店铺
                 </span>
               </div>
-              <div class="metric-value">2</div>
-              <p class="metric-desc">已建档 2 家店铺，其中 2 家处于启用状态。</p>
+              <div class="metric-value">1</div>
+              <p class="metric-desc">已建档 1 家店铺，处于启用状态，负责人已指定。</p>
               <div class="metric-footer">
                 <span class="metric-status active">已建档</span>
-                <span class="metric-count">活跃 2 / 2</span>
+                <span class="metric-count">活跃 1 / 1</span>
               </div>
             </div>
 
@@ -1028,7 +1197,7 @@
                 </span>
               </div>
               <div class="metric-value">5</div>
-              <p class="metric-desc">商品池共 5 个，其中 0 个未绑定店铺。</p>
+              <p class="metric-desc">商品池共 5 个，全部绑定店铺，卖点与平台 ID 均已补全。</p>
               <div class="metric-footer">
                 <span class="metric-status active">已入库</span>
                 <span class="metric-count">待补卖点 0</span>
@@ -1046,14 +1215,14 @@
                 </span>
               </div>
               <div class="metric-value">1</div>
-              <p class="metric-desc">已覆盖 1 个平台渠道，授权状态见各店铺详情。</p>
+              <p class="metric-desc">当前覆盖抖音 1 个渠道；系统平台枚举另支持淘宝、天猫、拼多多、京东、TikTok、Amazon。</p>
               <div class="metric-footer">
                 <span class="metric-status active">已授权</span>
                 <span class="metric-count">共 1 个渠道</span>
               </div>
             </div>
           </div>
-          <p class="demo-note">* 以上为演示环境样例数据，登录线上工作台可见真实经营数据。</p>
+          <p class="demo-note">* 以上为线上演示环境真实数据快照（另含 6 个 SKU、库存 360 件、竞品监控 1 条）；登录后可在工作台查看完整明细。</p>
         </div>
 
         <!-- Platform Section -->
@@ -1067,25 +1236,26 @@
 
           <div class="platform-card">
             <div class="platform-header">
-              <span class="platform-summary">店铺 2 · 覆盖平台 1</span>
-              <div class="platform-filters" role="group" aria-label="平台筛选">
-                <button class="filter-btn active" type="button">全部 5</button>
-                <button class="filter-btn" type="button">抖音 5</button>
-                <button class="filter-btn" type="button">淘宝 0</button>
-                <button class="filter-btn" type="button">天猫 0</button>
-                <button class="filter-btn" type="button">拼多多 0</button>
-                <button class="filter-btn" type="button">京东 0</button>
+              <span class="platform-summary">店铺 1 · 覆盖平台 1 · 商品 5</span>
+              <div class="platform-filters" role="group" aria-label="平台筛选（跳转线上工作台对应视图）">
+                <a class="filter-btn active" href="http://49.233.198.106/" target="_blank" rel="noopener">全部 5</a>
+                <a class="filter-btn" href="http://49.233.198.106/?platform=douyin" target="_blank" rel="noopener">抖音 5</a>
+                <a class="filter-btn" href="http://49.233.198.106/?platform=taobao" target="_blank" rel="noopener">淘宝 0</a>
+                <a class="filter-btn" href="http://49.233.198.106/?platform=tmall" target="_blank" rel="noopener">天猫 0</a>
+                <a class="filter-btn" href="http://49.233.198.106/?platform=pinduoduo" target="_blank" rel="noopener">拼多多 0</a>
+                <a class="filter-btn" href="http://49.233.198.106/?platform=jd" target="_blank" rel="noopener">京东 0</a>
               </div>
             </div>
 
             <table class="platform-table">
+              <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">线上演示环境店铺列表</caption>
               <thead>
                 <tr>
-                  <th>平台</th>
-                  <th>店铺名称</th>
-                  <th>状态</th>
-                  <th>商品数</th>
-                  <th>授权到期</th>
+                  <th scope="col">平台</th>
+                  <th scope="col">店铺名称</th>
+                  <th scope="col">状态</th>
+                  <th scope="col">商品数</th>
+                  <th scope="col">负责人</th>
                 </tr>
               </thead>
               <tbody>
@@ -1096,26 +1266,158 @@
                       抖音
                     </div>
                   </td>
-                  <td>测试店铺 A</td>
-                  <td><span class="platform-status online">● 在线</span></td>
-                  <td style="font-variant-numeric: tabular-nums;">3</td>
-                  <td style="font-family: var(--font-mono);">2026-12-31</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="platform-name">
-                      <div class="platform-icon" aria-hidden="true">抖</div>
-                      抖音
-                    </div>
-                  </td>
-                  <td>测试店铺 B</td>
-                  <td><span class="platform-status online">● 在线</span></td>
-                  <td style="font-variant-numeric: tabular-nums;">2</td>
-                  <td style="font-family: var(--font-mono);">2026-12-31</td>
+                  <td>抖音旗舰店（演示店铺）</td>
+                  <td><span class="platform-status online">● 启用</span></td>
+                  <td style="font-variant-numeric: tabular-nums;">5</td>
+                  <td>运营负责人</td>
                 </tr>
               </tbody>
             </table>
-            <p class="demo-note">* 演示数据 · 真实环境支持抖音 / 淘宝天猫 / 拼多多 / Amazon 四平台适配器</p>
+            <p class="demo-note">* 演示数据 · 公开链接解析适配器覆盖抖音 / 淘宝天猫 / 拼多多 / Amazon，其余平台走通用解析兜底</p>
+          </div>
+        </div>
+
+        <!-- Agent Section -->
+        <div class="agent-section">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="section-label">Agent Center</div>
+              <h2 class="section-title">Agent 中心 · 多智能体协作</h2>
+            </div>
+            <span class="platform-summary">版本化注册表 v1.0.0 · 可评测 · 可回退</span>
+          </div>
+
+          <div class="coord-card">
+            <div>
+              <h3 class="coord-title">ecommerce_operations_agent · 协调 Agent</h3>
+              <p class="coord-desc">顶层智能体，只负责意图识别、受控工作流路由和结果汇总，不直接执行动作；用户只与协调 Agent 交互，8 个专业 Agent 的版本与工具白名单全部可审计。意图按关键词路由到工作流：</p>
+              <div class="coord-routes" aria-label="意图路由示例">
+                <span class="flow-node">库存 / 缺货 / 补货 → 库存运营</span>
+                <span class="flow-node">竞品 / 对手 → 竞品持续监控</span>
+                <span class="flow-node">投放 / 广告 / 实验 → 投放实验闭环</span>
+                <span class="flow-node">复盘 / 经营分析 → 周期经营复盘</span>
+                <span class="flow-node">全店 / 组合 → 店铺组合巡检</span>
+                <span class="flow-node">图片 / 视频 / 素材 → 创意与素材生产</span>
+                <span class="flow-node">其余 → 商品诊断与优化</span>
+              </div>
+            </div>
+            <span class="risk-badge risk-r1">TOP-LEVEL</span>
+          </div>
+
+          <div class="agent-table-wrap">
+            <h3 class="agent-subtitle">专业 Agent 目录 <span class="count">8 个 · 工具白名单来自 AGENT_REGISTRY</span></h3>
+            <table class="platform-table">
+              <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">8 个专业 Agent 的职责与允许工具数</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Agent</th>
+                  <th scope="col">职责</th>
+                  <th scope="col">允许工具</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="mono">market_intelligence_agent</span><br>市场情报</td>
+                  <td>竞品变化、市场机会和卖点趋势</td>
+                  <td class="mono">4 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">product_strategy_agent</span><br>商品策略</td>
+                  <td>商品定位、价格带、人群、卖点和优化动作</td>
+                  <td class="mono">3 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">creative_strategy_agent</span><br>创意策略</td>
+                  <td>主图、视频脚本、标题与详情策略</td>
+                  <td class="mono">3 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">content_production_agent</span><br>内容生产</td>
+                  <td>候选素材生产、版本和供应商任务编排</td>
+                  <td class="mono">3 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">growth_experiment_agent</span><br>增长实验</td>
+                  <td>推广链接、投放建议和实验假设</td>
+                  <td class="mono">4 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">performance_review_agent</span><br>经营复盘</td>
+                  <td>经营数据、素材、实验和周期复盘</td>
+                  <td class="mono">3 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">inventory_operations_agent</span><br>库存运营</td>
+                  <td>库存风险、补货、调拨和盘点建议</td>
+                  <td class="mono">5 个</td>
+                </tr>
+                <tr>
+                  <td><span class="mono">quality_compliance_agent</span><br>质量合规</td>
+                  <td>结构、事实依据、合规、风险和输出质量（纯规则审核，不持工具）</td>
+                  <td class="mono">0 个</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="agent-table-wrap">
+            <h3 class="agent-subtitle">受控工作流 <span class="count">7 个 · 默认风险等级 R1 / R2</span></h3>
+            <table class="platform-table">
+              <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">7 个受控工作流的专家链与必需上下文</caption>
+              <thead>
+                <tr>
+                  <th scope="col">工作流</th>
+                  <th scope="col">默认风险</th>
+                  <th scope="col">专家链</th>
+                  <th scope="col">必需上下文</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>商品诊断与优化<br><span class="mono">product_diagnosis_optimization</span></td>
+                  <td><span class="risk-badge risk-r2">R2</span></td>
+                  <td>商品策略 → 创意策略 → 质量合规</td>
+                  <td class="mono">product_id</td>
+                </tr>
+                <tr>
+                  <td>创意与素材生产<br><span class="mono">creative_content_production</span></td>
+                  <td><span class="risk-badge risk-r1">R1</span></td>
+                  <td>创意策略 → 内容生产 → 质量合规</td>
+                  <td class="mono">product_id</td>
+                </tr>
+                <tr>
+                  <td>竞品持续监控<br><span class="mono">competitor_continuous_monitoring</span></td>
+                  <td><span class="risk-badge risk-r1">R1</span></td>
+                  <td>市场情报 → 质量合规</td>
+                  <td class="mono">product_id / store_id</td>
+                </tr>
+                <tr>
+                  <td>投放实验闭环<br><span class="mono">growth_ad_experiment_loop</span></td>
+                  <td><span class="risk-badge risk-r2">R2</span></td>
+                  <td>增长实验 → 经营复盘 → 质量合规</td>
+                  <td class="mono">product_id</td>
+                </tr>
+                <tr>
+                  <td>周期经营复盘<br><span class="mono">periodic_performance_review</span></td>
+                  <td><span class="risk-badge risk-r1">R1</span></td>
+                  <td>经营复盘 → 质量合规</td>
+                  <td class="mono">product_id / store_id</td>
+                </tr>
+                <tr>
+                  <td>库存运营<br><span class="mono">inventory_operations</span></td>
+                  <td><span class="risk-badge risk-r1">R1</span></td>
+                  <td>库存运营 → 质量合规</td>
+                  <td class="mono">product_id / store_id</td>
+                </tr>
+                <tr>
+                  <td>店铺组合巡检<br><span class="mono">store_portfolio_inspection</span></td>
+                  <td><span class="risk-badge risk-r1">R1</span></td>
+                  <td>市场情报 → 商品策略 → 经营复盘 → 库存运营 → 质量合规</td>
+                  <td class="mono">store_id</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="table-note">Task = 业务目标 · Run = 实际执行与重试；任务状态：排队中 queued / 执行中 running / 待审批 awaiting_approval / 已完成 completed / 失败 failed / 已取消 cancelled；R2 / R3 副作用必须经数据库审批放行。</p>
           </div>
         </div>
 
@@ -1130,30 +1432,51 @@
 
           <div class="cap-grid">
             <div class="cap-card">
-              <h3 class="cap-name">LangGraph 运营工作流</h3>
-              <p class="cap-desc">商品上下文 → 诊断 → 创意策略 → 质量审核 → 人工审核，五步状态机推进，执行过程实时可见。</p>
+              <h3 class="cap-name">LangGraph 五步运营工作流</h3>
+              <p class="cap-desc">商品上下文 → 诊断 → 创意策略 → 质量审核 → 人工审核 → 落库，状态机推进；未通过质量审核回到诊断节点受控返修（最多 1 轮），人工审核门支持 通过 / 修改后通过 / 驳回 三种决定。</p>
               <div class="cap-flow" aria-label="工作流节点">
                 <span class="flow-node">商品上下文</span><span class="flow-arrow">→</span>
-                <span class="flow-node">诊断</span><span class="flow-arrow">→</span>
+                <span class="flow-node">商品诊断</span><span class="flow-arrow">→</span>
                 <span class="flow-node">创意策略</span><span class="flow-arrow">→</span>
                 <span class="flow-node">质量审核</span><span class="flow-arrow">→</span>
-                <span class="flow-node">人工审核</span>
+                <span class="flow-node">人工审核</span><span class="flow-arrow">→</span>
+                <span class="flow-node">完成落库</span>
               </div>
             </div>
 
             <div class="cap-card">
               <h3 class="cap-name">ToolGateway 统一工具网关</h3>
-              <p class="cap-desc">收敛竞品监控、创意方案、广告推荐、库存建议等 7 类运营工具，租户 / 角色 / 租约 / 幂等四重管控。</p>
+              <p class="cap-desc">注册 16 个工具并按 R0 至 R3 分级，可执行 7 类运营工具：诊断草稿、竞品监控、创意方案、投放建议、推广链接、经营复盘、库存建议。每次执行前复核租户、角色、租约与幂等键，操作结果脱敏留存、可审计可恢复。</p>
             </div>
 
             <div class="cap-card">
-              <h3 class="cap-name">四平台竞品监控</h3>
-              <p class="cap-desc">抖音 / 淘宝天猫 / 拼多多 / Amazon 适配器抓取竞品快照，自动对比变化并生成监控报告。</p>
+              <h3 class="cap-name">人工审核门与审批收件箱</h3>
+              <p class="cap-desc">LangGraph interrupt 在落库前暂停等待人工决定，草稿与质量报告随中断一起呈现；R2 / R3 副作用（对外发布、预算调整、库存调整）另需数据库审批，审批带过期时间与决策理由，驳回必须填写原因。</p>
+            </div>
+
+            <div class="cap-card">
+              <h3 class="cap-name">质量闭环与规则兜底</h3>
+              <p class="cap-desc">质量 Agent 按 5 条规则审核：建议可执行性、创意数量、角度多样性、绝对化用语黑名单、证明点完备性，百分制扣分；LLM 不可用或输出不合法时自动降级规则生成，provenance 记录来源与模型，全过程 OpenTelemetry 链路追踪。</p>
+            </div>
+
+            <div class="cap-card">
+              <h3 class="cap-name">竞品监控与公开链接解析</h3>
+              <p class="cap-desc">粘贴竞品商品链接即可建档，解析适配器覆盖抖音 / 淘宝天猫 / 拼多多 / Amazon 四平台，其余走通用解析；监控按间隔天数调度，快照自动对比价格等字段变化并形成结构化建议。</p>
             </div>
 
             <div class="cap-card">
               <h3 class="cap-name">多模态素材生成</h3>
-              <p class="cap-desc">对接 DashScope / 即梦双供应商，打通「文案 → 图片 → 视频」生成链路，产出可直接投放的创意素材。</p>
+              <p class="cap-desc">对接 DashScope / 即梦双供应商，图片支持 wan2.6 文生图与图像编辑，视频走「脚本方向 → 视频草稿 → 素材入库」；生成任务三态管理，支持重试、取消与超时清扫，产物落 uploads 供素材库直接访问。</p>
+            </div>
+
+            <div class="cap-card">
+              <h3 class="cap-name">库存运营</h3>
+              <p class="cap-desc">SKU 维度库存管理，可用量 = 在库 - 锁定，低于预警线自动标红；支持入库、出库、锁定、盘点四类变动流水，补货 / 调拨 / 盘点建议人工确认后才执行，R3 级库存调整仅 owner 可发起。</p>
+            </div>
+
+            <div class="cap-card">
+              <h3 class="cap-name">投放实验闭环与经营复盘</h3>
+              <p class="cap-desc">投放建议生成后需人工确认，实验看板跟踪假设与状态；推广链接支持系统生成与手动录入，短链归因点击；周期复盘汇总经营数据生成可编辑报告与行动建议，形成「建议 → 实验 → 数据 → 复盘」证据链。</p>
             </div>
           </div>
         </div>
@@ -1167,7 +1490,7 @@
             </div>
           </div>
           <div class="stack">
-            <span>Python</span><span>LangGraph</span><span>FastAPI</span><span>Next.js</span><span>MySQL</span><span>Redis</span><span>SSE 实时推送</span><span>RBAC</span><span>DashScope</span><span>即梦</span><span>Docker</span>
+            <span>Python 3.12 · uv</span><span>FastAPI · Uvicorn</span><span>LangGraph · Checkpointer</span><span>SQLAlchemy 2.x · Alembic</span><span>Next.js 16 · React 19 · Tailwind 4</span><span>MySQL 8.4</span><span>Redis · Celery · Outbox</span><span>OpenTelemetry</span><span>DashScope · 即梦</span><span>Docker Compose</span>
           </div>
         </div>
       </div>
@@ -1178,15 +1501,5 @@
       </footer>
     </main>
   </div>
-
-  <script>
-    // 筛选按钮交互（纯视觉切换）
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-  </script>
 </body>
 </html>
